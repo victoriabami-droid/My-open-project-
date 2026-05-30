@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bella Cucina – Fine Italian Dining</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --cream: #f5f0e8;
+      --dark: #1a1208;
+      --gold: #c9a84c;
+      --brown: #6b4c2a;
+      --text: #3a2e1e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background-color: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(26, 18, 8, 0.92);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-btn {
+      background: var(--gold);
+      color: var(--dark) !important;
+      padding: 0.5rem 1.2rem;
+      font-weight: 500 !important;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1a1208 0%, #2e1f0a 60%, #4a2f10 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      max-width: 650px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 1.1;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(245,240,232,0.7);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--dark);
+      padding: 0.9rem 2rem;
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: #e0bc5e; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--cream);
+      padding: 0.9rem 2rem;
+      border: 1px solid rgba(245,240,232,0.4);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.3s, color 0.3s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      padding: 7rem 5%;
+      align-items: center;
+    }
+
+    .about-text span {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .about-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+    }
+
+    .about-text p {
+      font-size: 0.98rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #5a4a35;
+      margin-bottom: 1rem;
+    }
+
+    .about-image {
+      position: relative;
+    }
+
+    .about-image .img-box {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: linear-gradient(135deg, #2e1f0a, #6b4c2a);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-image .img-box::after {
+      content: '🍝';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 6rem;
+      opacity: 0.3;
+    }
+
+    .about-image .img-accent {
+      position: absolute;
+      bottom: -20px; left: -20px;
+      width: 120px; height: 120px;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .about-image .img-accent strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .about-image .img-accent span {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--dark);
+    }
+
+    /* MENU */
+    .menu {
+      background: var(--dark);
+      padding: 7rem 5%;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .menu h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--cream);
+      margin-bottom: 3.5rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto 3rem;
+    }
+
+    .menu-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2rem;
+      text-align: left;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .menu-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .menu-card .emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+    .menu-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-card p {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.5);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .menu-card .price {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 7rem 5%;
+      text-align: center;
+    }
+
+    .testimonials h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 3.5rem;
+      color: var(--dark);
+    }
+
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .testi-card {
+      background: white;
+      padding: 2rem;
+      text-align: left;
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+
+    .testi-card .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; }
+
+    .testi-card p {
+      font-size: 0.92rem;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 1.2rem;
+    }
+
+    .testi-card .author {
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--brown);
+      font-style: normal;
+      font-family: 'Jost', sans-serif;
+    }
+
+    /* RESERVATION */
+    .reservation {
+      background: linear-gradient(135deg, #1a1208, #2e1f0a);
+      padding: 7rem 5%;
+      text-align: center;
+    }
+
+    .reservation h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--cream);
+      margin-bottom: 1rem;
+    }
+
+    .reservation p {
+      color: rgba(245,240,232,0.6);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      font-size: 1rem;
+    }
+
+    .reservation-form {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .reservation-form input,
+    .reservation-form select {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--cream);
+      padding: 1rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.9rem;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .reservation-form input::placeholder { color: rgba(245,240,232,0.4); }
+    .reservation-form input:focus,
+    .reservation-form select:focus { border-color: var(--gold); }
+    .reservation-form select option { background: #1a1208; }
+
+    /* FOOTER */
+    footer {
+      background: #0e0a04;
+      padding: 3rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+    }
+
+    footer p {
+      color: rgba(245,240,232,0.3);
+      font-size: 0.8rem;
+    }
+
+    footer .socials { display: flex; gap: 1rem; }
+    footer .socials a {
+      color: rgba(245,240,232,0.4);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+    }
+    footer .socials a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about { grid-template-columns: 1fr; gap: 2rem; }
+      .about-image { order: -1; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Bella Cucina</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#reserve" class="nav-btn">Reserve</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">✦ Fine Italian Dining ✦</span>
+      <h1>Where Every Meal<br/>is an <em>Experience</em></h1>
+      <p>Authentic Italian flavors crafted with passion, served in an atmosphere of warmth and elegance. Join us for an unforgettable dining journey.</p>
+      <div class="hero-btns">
+        <a href="#reserve" class="btn-primary">Reserve a Table</a>
+        <a href="#menu" class="btn-outline">View Menu</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <span>Our Story</span>
+      <h2>Crafted with Passion,<br/>Served with Love</h2>
+      <p>Since 1998, Bella Cucina has been bringing the heart of Italy to your table. Our chefs travel to Italy every year to bring back authentic recipes, the finest ingredients, and the spirit of true Italian hospitality.</p>
+      <p>Every dish tells a story — from our handmade pasta to our slow-cooked ragù, each bite is a journey to the Italian countryside.</p>
+    </div>
+    <div class="about-image">
+      <div class="img-box"></div>
+      <div class="img-accent">
+        <strong>25+</strong>
+        <span>Years of Excellence</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <span class="section-label">Our Specialties</span>
+    <h2>A Taste of Italy</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <span class="emoji">🍝</span>
+        <h3>Tagliatelle al Ragù</h3>
+        <p>Handmade egg tagliatelle with slow-cooked Bolognese sauce, aged Parmigiano Reggiano.</p>
+        <span class="price">$24</span>
+      </div>
+      <div class="menu-card">
+        <span class="emoji">🍕</span>
+        <h3>Pizza Margherita</h3>
+        <p>Wood-fired Neapolitan pizza with San Marzano tomatoes, fresh buffalo mozzarella, basil.</p>
+        <span class="price">$19</span>
+      </div>
+      <div class="menu-card">
+        <span class="emoji">🦞</span>
+        <h3>Risotto ai Frutti di Mare</h3>
+        <p>Creamy Arborio risotto with fresh seafood, white wine, saffron, and cherry tomatoes.</p>
+        <span class="price">$32</span>
+      </div>
+      <div class="menu-card">
+        <span class="emoji">🍮</span>
+        <h3>Tiramisù della Casa</h3>
+        <p>Our signature dessert — layers of espresso-soaked savoiardi and mascarpone cream.</p>
+        <span class="price">$12</span>
+      </div>
+    </div>
+    <a href="#reserve" class="btn-primary">Book Your Table</a>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="reviews">
+    <span class="section-label">What Guests Say</span>
+    <h2>Loved by Food Lovers</h2>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"The best Italian food I've had outside of Rome. The pasta is absolutely divine and the atmosphere is magical."</p>
+        <span class="author">— Sarah M., New York</span>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Bella Cucina is our go-to for every special occasion. The service is impeccable and the food never disappoints."</p>
+        <span class="author">— James R., London</span>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p>"Authentic flavors, warm ambiance, and staff who genuinely care. This place has become our family tradition."</p>
+        <span class="author">— Maria L., Toronto</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="reservation" id="reserve">
+    <span class="section-label">Reservations</span>
+    <h2>Book Your Table</h2>
+    <p>Join us for an unforgettable dining experience. Reserve your table today.</p>
+    <div class="reservation-form">
+      <input type="text" placeholder="Your Name" />
+      <input type="email" placeholder="Email Address" />
+      <input type="date" />
+      <select>
+        <option value="" disabled selected>Guests</option>
+        <option>1 Guest</option>
+        <option>2 Guests</option>
+        <option>3–4 Guests</option>
+        <option>5+ Guests</option>
+      </select>
+    </div>
+    <a href="#" class="btn-primary">Confirm Reservation</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">Bella Cucina</div>
+    <p>© 2024 Bella Cucina. All rights reserved.</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">TripAdvisor</a>
+    </div>
+  </footer>
+
+</body>
+</html>
